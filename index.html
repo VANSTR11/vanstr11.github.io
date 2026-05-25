@@ -3,142 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GordenCantik - Toko Gorden Online</title>
+  <title>ALVAN - Bordir Gorden Permak</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-    body { background: #f5f5f5; }
-    header { background: #2c3e50; color: white; padding: 1rem; position: sticky; top: 0; z-index: 100; }
-    .nav { max-width: 1200px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 1.5rem; font-weight: bold; }
-    .cart-btn { background: #e74c3c; border: none; color: white; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
-    .hero { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1615874959474-d609faaedf12?w=1200'); background-size: cover; color: white; text-align: center; padding: 4rem 1rem; }
-    .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-    .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
-    .section-title { text-align: center; margin-bottom: 2rem; font-size: 2rem; color: #2c3e50; }
-    #product-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
-    .product-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; }
-    .product-card:hover { transform: translateY(-5px); }
-    .product-card img { width: 100%; height: 200px; object-fit: cover; }
-    .product-info { padding: 1rem; }
-    .product-card h3 { margin-bottom: 0.5rem; font-size: 1.1rem; }
-    .price { color: #e74c3c; font-weight: bold; font-size: 1.2rem; margin-bottom: 1rem; }
-    .product-card button { width: 100%; background: #27ae60; color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    .product-card button:hover { background: #219150; }
-    
-    /* Modal Keranjang */
-    .modal { display: none; position: fixed; z-index: 200; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
-    .modal-content { background: white; margin: 10% auto; padding: 20px; border-radius: 12px; width: 90%; max-width: 500px; }
-    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
-    .close { font-size: 28px; cursor: pointer; }
-    .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
-    .cart-total { text-align: right; font-size: 1.3rem; margin: 1rem 0; font-weight: bold; }
-    .checkout-btn { width: 100%; background: #25D366; color: white; border: none; padding: 15px; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; }
-    
-    footer { background: #2c3e50; color: white; text-align: center; padding: 2rem 1rem; margin-top: 3rem; }
+    * {margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif;}
+    body {line-height:1.6; color:#333;}
+    .header {background:linear-gradient(135deg, #6a11cb, #2575fc); color:white; padding:60px 20px; text-align:center;}
+    .header h1 {font-size:32px; margin-bottom:10px;}
+    .header p {font-size:18px; opacity:0.9;}
+    .container {max-width:1000px; margin:auto; padding:40px 20px;}
+    .banner-utama { width: 100%; max-width: 600px; margin: 0 auto 20px; display: block; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+    .btn-group { display: flex; gap: 10px; justify-content: center; margin-bottom: 40px; flex-wrap: wrap; }
+    .btn-bordir { background: #dc2626; }
+    .btn-bordir:hover { background: #b91c1c; }
+    .btn-permak { background: #ea580c; }
+    .btn-permak:hover { background: #c2410c; }
+    .produk {display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:25px; margin:40px 0;}
+    .card {border:1px solid #eee; border-radius:12px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.1);}
+    .card img {width:100%; height:200px; object-fit:cover;}
+    .card-body {padding:20px;}
+    .card h3 {margin-bottom:10px; color:#6a11cb;}
+    .harga {font-size:20px; font-weight:bold; color:#25D366; margin:10px 0;}
+    .btn {display:inline-block; background:#25D366; color:white; padding:12px 25px; border-radius:50px; text-decoration:none; font-weight:bold; border:none; cursor:pointer; width:100%; text-align:center;}
+    .btn:hover {background:#1da851;}
+    .form-box {background:#f8f9fa; padding:30px; border-radius:12px; margin-top:40px;}
+    .form-box input, .form-box textarea {width:100%; padding:12px; margin:8px 0; border:1px solid #ddd; border-radius:8px; font-size:16px;}
+    .footer {background:#222; color:#aaa; text-align:center; padding:20px; margin-top:40px;}
+    .wa-float {position:fixed; bottom:20px; right:20px; background:#25D366; color:white; width:60px; height:60px; border-radius:50%; text-align:center; font-size:30px; box-shadow:0 4px 12px rgba(0,0,0,0.3); z-index:100;}
+    .wa-float a {color:white; text-decoration:none; line-height:60px;}
   </style>
 </head>
 <body>
-  <header>
-    <div class="nav">
-      <div class="logo">GordenCantik</div>
-      <button class="cart-btn" onclick="openCart()">🛒 Keranjang <span id="cart-count">0</span></button>
-    </div>
-  </header>
-
-  <section class="hero">
-    <h1>ALVAN BORDIR</h1>
-    <p>Blackout, Minimalis, Vitrase - Siap Kirim Seluruh Indonesia</p>
-  </section>
-
+  <div class="header">
+    <h1>ALVAN BORDIR GORDEN PERMAK</h1>
+    <p>Menerima Pesanan Bordir, Gorden, & Permak Baju</p>
+  </div>
   <div class="container">
-    <h2 class="section-title">Katalog Produk</h2>
-    <div id="product-list"></div>
-  </div>
-
-  <!-- Modal Keranjang -->
-  <div id="cartModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Keranjang Belanja</h2>
-        <span class="close" onclick="closeCart()">&times;</span>
+    <img src="alvan-banner.jpg" alt="ALVAN Bordir Gorden Permak" class="banner-utama">
+    <div class="btn-group">
+      <a class="btn btn-bordir" href="https://wa.me/6281364648245?text=Halo%20kak%20ALVAN,%20saya%20mau%20pesan%20BORDIR">🧵 Pesan Bordir</a>
+      <a class="btn btn-permak" href="https://wa.me/6281364648245?text=Halo%20kak%20ALVAN,%20saya%20mau%20PERMAK%20baju/celana">✂️ Permak Baju</a>
+      <a class="btn" href="https://wa.me/6281364648245?text=Halo%20kak%20ALVAN,%20saya%20mau%20tanya%20GORDEN">🏠 Pesan Gorden</a>
+    </div>
+    <h2 style="text-align:center; margin-bottom:20px;">Katalog Gorden Best Seller</h2>
+    <div class="produk">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400" alt="Gorden Minimalis">
+        <div class="card-body">
+          <h3>Gorden Minimalis Polos</h3>
+          <p>Cocok untuk ruang tamu & kamar. Bahan blackout 80%.</p>
+          <div class="harga">Rp 185.000/meter</div>
+          <a class="btn" href="https://wa.me/6281364648245?text=Halo%20kak,%20saya%20mau%20pesan%20Gorden%20Minimalis%20Polos">Pesan via WhatsApp</a>
+        </div>
       </div>
-      <div id="cart-items"></div>
-      <div class="cart-total">Total: <span id="total-harga">Rp 0</span></div>
-      <button class="checkout-btn" onclick="checkoutWA()">Checkout via WhatsApp</button>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=400" alt="Gorden Mewah">
+        <div class="card-body">
+          <h3>Gorden Mewah Embos</h3>
+          <p>Motif timbul elegan. Bahan tebal, anti panas.</p>
+          <div class="harga">Rp 250.000/meter</div>
+          <a class="btn" href="https://wa.me/6281364648245?text=Halo%20kak,%20saya%20mau%20pesan%20Gorden%20Mewah%20Embos">Pesan via WhatsApp</a>
+        </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=400" alt="Gorden Vitrase">
+        <div class="card-body">
+          <h3>Vitrase + Gorden Set</h3>
+          <p>Paket hemat. Gorden utama + vitrase tipis.</p>
+          <div class="harga">Rp 350.000/set</div>
+          <a class="btn" href="https://wa.me/6281364648245?text=Halo%20kak,%20saya%20mau%20pesan%20Vitrase%20+%20Gorden%20Set">Pesan via WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <div class="form-box">
+      <h2 style="text-align:center; margin-bottom:20px;">Mau Konsultasi Bordir / Gorden / Permak?</h2>
+      <p style="text-align:center; margin-bottom:20px;">Isi form ini, otomatis masuk WhatsApp kami</p>
+      <input type="text" id="nama" placeholder="Nama Kamu">
+      <input type="text" id="ukuran" placeholder="Ukuran / Jenis Pesanan: Contoh Gorden 2x1.5m atau Bordir Logo">
+      <textarea id="pesan" rows="3" placeholder="Detail pesanan / Tanya harga"></textarea>
+      <button class="btn" onclick="kirimWA()">Kirim ke WhatsApp</button>
     </div>
   </div>
-
-  <footer>
-    <p>&copy; 2026 GordenCantik. WA: 0813-6464-8245</p>
-  </footer>
-
+  <div class="wa-float">
+    <a href="https://wa.me/6281364648245?text=Halo%20kak%20ALVAN,%20saya%20mau%20tanya-tanya">✆</a>
+  </div>
+  <div class="footer">
+    <p>© 2026 ALVAN Bordir Gorden Permak | Hubungi: 0813-6464-8245</p>
+    <p>Alamat: Jl. Propinsi Parit 4, Tembilahan Hulu</p>
+  </div>
   <script>
-    const products = [
-      { id: 1, nama: "Gorden Blackout Polos Coklat", harga: 95000, gambar: "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=500" },
-      { id: 2, nama: "Gorden Minimalis Motif Garis", harga: 150000, gambar: "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=500" },
-      { id: 3, nama: "Vitrase Putih Premium", harga: 121000, gambar: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=500" },
-      { id: 4, nama: "Gorden Smokring Abu-abu", harga: 210000, gambar: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=500" }
-    ];
-
-    let cart = [];
-    const modal = document.getElementById('cartModal');
-
-    function renderProducts() {
-      const list = document.getElementById('product-list');
-      list.innerHTML = products.map(p => `
-        <div class="product-card">
-          <img src="${p.gambar}" alt="${p.nama}">
-          <div class="product-info">
-            <h3>${p.nama}</h3>
-            <p class="price">Rp ${p.harga.toLocaleString('id-ID')}</p>
-            <button onclick="addToCart(${p.id})">+ Tambah Keranjang</button>
-          </div>
-        </div>
-      `).join('');
+    function kirimWA() {
+      let nama = document.getElementById('nama').value;
+      let ukuran = document.getElementById('ukuran').value;
+      let pesan = document.getElementById('pesan').value;
+      if(nama === '' || ukuran === '') {
+        alert('Isi nama & detail pesanan dulu ya kak');
+        return;
+      }
+      let text = `Halo kak ALVAN%0A%0ANama: ${nama}%0ADetail Pesanan: ${ukuran}%0APesan: ${pesan}%0A%0ASaya mau tanya-tanya`;
+      let url = `https://wa.me/6281364648245?text=${text}`;
+      window.open(url, '_blank');
     }
-
-    function addToCart(id) {
-      const produk = products.find(p => p.id === id);
-      const item = cart.find(i => i.id === id);
-      if (item) item.qty++; else cart.push({ ...produk, qty: 1 });
-      updateCart();
-      alert(`${produk.nama} ditambahkan ke keranjang!`);
-    }
-
-    function updateCart() {
-      const cartCount = document.getElementById('cart-count');
-      const cartItems = document.getElementById('cart-items');
-      const totalHarga = document.getElementById('total-harga');
-      
-      let totalQty = 0, total = 0;
-      cartItems.innerHTML = cart.map(item => {
-        totalQty += item.qty;
-        total += item.harga * item.qty;
-        return `<div class="cart-item"><span>${item.nama} x${item.qty}</span><span>Rp ${(item.harga * item.qty).toLocaleString('id-ID')}</span></div>`;
-      }).join('') || '<p>Keranjang kosong</p>';
-      
-      cartCount.innerText = totalQty;
-      totalHarga.innerText = `Rp ${total.toLocaleString('id-ID')}`;
-    }
-
-    function openCart() { modal.style.display = 'block'; }
-    function closeCart() { modal.style.display = 'none'; }
-    window.onclick = e => { if (e.target == modal) closeCart(); }
-
-    function checkoutWA() {
-      if (cart.length === 0) return alert('Keranjang masih kosong!');
-      const noWA = '6281364648245'; // GANTI NOMOR WA KAMU DI SINI
-      let pesan = `Halo GordenCantik, saya mau order:%0A%0A`;
-      let total = 0;
-      cart.forEach(item => {
-        pesan += `- ${item.nama} x${item.qty} = Rp ${(item.harga * item.qty).toLocaleString('id-ID')}%0A`;
-        total += item.harga * item.qty;
-      });
-      pesan += `%0ATotal: Rp ${total.toLocaleString('id-ID')}%0A%0AMohon info ongkir & total bayarnya.`;
-      window.open(`https://wa.me/${noWA}?text=${pesan}`, '_blank');
-    }
-
-    document.addEventListener('DOMContentLoaded', renderProducts);
   </script>
 </body>
 </html>
